@@ -1,9 +1,10 @@
 # README
 
-###Completed features:
+Completed features:
 1. Data models & seeds
-2. Endpoint to create prescription
-###Missed features:
+2. Endpoint to create prescription 
+  
+Missed features:
 1. PDF generation for prescription
 2. Endpoints to get formulations and ingredients
  
