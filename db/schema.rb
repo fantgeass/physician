@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_22_094914) do
+ActiveRecord::Schema.define(version: 2018_05_24_072322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "formulation_ingredients", id: false, force: :cascade do |t|
+  create_table "formulation_ingredients", force: :cascade do |t|
     t.bigint "formulation_id", null: false
     t.bigint "ingredient_id", null: false
     t.float "percentage"
@@ -42,13 +42,24 @@ ActiveRecord::Schema.define(version: 2018_05_22_094914) do
     t.index ["classes"], name: "index_ingredients_on_classes", using: :gin
   end
 
+  create_table "prescription_ingredients", force: :cascade do |t|
+    t.bigint "prescription_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.float "percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_prescription_ingredients_on_ingredient_id"
+    t.index ["prescription_id"], name: "index_prescription_ingredients_on_prescription_id"
+  end
+
   create_table "prescriptions", force: :cascade do |t|
+    t.bigint "formulation_id", null: false
     t.string "name"
     t.string "address"
     t.date "date_of_birth"
-    t.jsonb "formulation_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["formulation_id"], name: "index_prescriptions_on_formulation_id"
   end
 
 end
